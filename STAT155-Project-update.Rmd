@@ -1,0 +1,59 @@
+---
+title: "Untitled"
+author: "Jenny Li"
+date: "2021/9/17"
+output: html_document
+---
+
+---
+title: "Project 1: Data Exploration and Visualization"
+author: "INSERT YOUR NAME(S) HERE"
+date: "Due Date Here"
+output: html_document
+---
+
+<!--- Begin styling code. --->
+<style type="text/css">
+/* Whole document: */
+body{
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 12pt;
+}
+h1.title {
+  font-size: 38px;
+  text-align: center;
+}
+h4.author {
+  font-size: 18px;
+  text-align: center;
+}
+h4.date {
+  font-size: 18px;
+  text-align: center;
+}
+</style>
+<!--- End styling code. --->
+```{r,message=FALSE,echo=FALSE}
+library(tidyverse)
+library(splitstackshape)
+```
+
+
+```{r,echo=FALSE,message=FALSE}
+#  full_bg<-read_csv('https://raw.githubusercontent.com/bryandmartin/STAT155/master/docs/Projects/project1_bgdataviz/board_game_raw.csv')
+#  
+# write_csv(full_bg,"./Data/full_bg.csv")
+
+full_bg<- read_csv("./Data/full_bg.csv")
+```
+#Instruction
+
+#Mian Section
+
+#Conclusion
+
+# Code Appendix
+```{r,eval=FALSE}
+#all the code in here
+```
+
