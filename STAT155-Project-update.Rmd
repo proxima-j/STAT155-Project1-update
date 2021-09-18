@@ -1,6 +1,6 @@
 ---
-title: "Untitled"
-author: "Jenny Li"
+title: "Project 1: Data Exploration and Visualization"
+author: "Jenny Li, Xiang Li"
 date: "2021/9/17"
 output: html_document
 ---
