@@ -57,7 +57,7 @@ I am only interested in games published in 1950 or later and with at least 25 ra
 
 Keep in mind: **there are no right answers for this project!**
 These are real data, and I'm hoping for creative and interesting analyses that tell a compelling story about the data rather than cookie cutter reports. Have some fun with it, and good luck!
-```{r,echo=FALSE,message=FALSE}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 #filter games published in 1950 or later and with at least 25 ratings
 newFull_gb<-full_bg%>%
   filter(yearpublished>=1950,users_rated>=25)
