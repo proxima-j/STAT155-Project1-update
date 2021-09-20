@@ -91,6 +91,15 @@ catan<-full_bg%>%
 ```
 
 >Visualization four(maybe the see the category each games contains)
+```{r}
+
+```
+
+>Visualization five(maybe using stacked bar plot compare two category of games within years )
+```{r}
+
+```
+
 #Conclusion
 
 # Code Appendix
