@@ -74,10 +74,23 @@ catan<-full_bg%>%
 
 
 #Mian Section
+
+>Visualization one(maybe playingtime and maxplyers)
 ```{r}
 
 ```
 
+>Viualization two(maybe the average rating and average rated)
+```{r}
+
+```
+
+>Visualtion three(games that published in each year)
+```{r}
+
+```
+
+>Visualization four(maybe the see the category each games contains)
 #Conclusion
 
 # Code Appendix
