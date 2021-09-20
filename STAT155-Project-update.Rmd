@@ -66,10 +66,17 @@ full_bgMechanic<-full_bg%>%
 
 full_bgCategory<-full_bg%>%
   cSplit("category", direction="long")
+
+#searching for certain category(contains the word in the name)
+catan<-full_bg%>%
+  filter(grepl("Catan",name))
 ```
 
 
 #Mian Section
+```{r}
+
+```
 
 #Conclusion
 
