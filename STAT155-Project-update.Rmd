@@ -62,7 +62,7 @@ catan<-newFull_gb%>%
 
 >Visualization one(maybe playingtime and maxplyers)
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 newFull_gb %>%
   ggplot(aes(x = maxplayers, y = playingtime)) +
   geom_point() +
@@ -73,18 +73,18 @@ newFull_gb %>%
 
 >Viualization two(maybe the average rating and users rated)
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 newFull_gb %>%
   ggplot(aes(x = users_rated, y = average_rating)) +
   labs(y = 'average rating', x = 'the number of users rated') +
-  theme_minimal() +
-  geom_point(color = 'steelblue') 
-
+  geom_smooth(method = 'lm')+
+  geom_point(color = 'steelblue') +
+  theme_minimal() 
 ```
 
 >Visualtion three(games that published in each year)
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 #print(max(newFull_gb$yearpublished))
 newFull_gb %>%
   ggplot(aes(x = yearpublished)) +
