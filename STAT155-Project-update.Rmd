@@ -46,10 +46,10 @@ full_bg<- read_csv("./Data/full_bg.csv")
 newFull_gb<-full_bg%>%
   filter(yearpublished>=1950,users_rated>=25)
 
-full_bgMechanic<-newFull_gb%>%
+full_gbMechanic<-newFull_gb%>%
   cSplit("category", direction="wide")
 
-full_bgCategory<-newFull_gb%>%
+full_gbCategory<-newFull_gb%>%
   cSplit("category", direction="long")
 
 #searching for certain category(contains the word in the name)
@@ -61,26 +61,43 @@ catan<-newFull_gb%>%
 #Mian Section
 
 >Visualization one(maybe playingtime and maxplyers)
-```{r}
 
+```{r}
+newFull_gb %>%
+  ggplot(aes(x = maxplayers, y = playingtime)) +
+  geom_point() +
+  xlim(0, 20) +
+  ylim(0, 20000)
 ```
 
->Viualization two(maybe the average rating and average rated)
-```{r}
+>Viualization two(maybe the average rating and users rated)
 
+```{r}
+newFull_gb %>%
+  ggplot(aes(x = users_rated, y = average_rating)) +
+  labs(y = 'average rating', x = 'the number of users rated') +
+  theme_minimal() +
+  geom_point(color = 'steelblue') 
 ```
 
 >Visualtion three(games that published in each year)
-```{r}
 
+```{r}
+newFull_gb %>%
+  ggplot(aes(x = yearpublished)) +
+  labs(y = 'number of games published', x = 'years published') +
+  scale_x_continuous() +
+  geom_histogram(binwidth = 1)
 ```
 
 >Visualization four(maybe the see the category each games contains)
+
 ```{r}
 
 ```
 
 >Visualization five(maybe using stacked bar plot compare two category of games within years )
+
 ```{r}
 
 ```
