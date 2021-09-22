@@ -67,7 +67,8 @@ newFull_gb %>%
   ggplot(aes(x = maxplayers, y = playingtime)) +
   geom_point() +
   xlim(0, 20) +
-  ylim(0, 20000)
+  ylim(0, 20000)+
+  theme_minimal()
 ```
 
 >Viualization two(maybe the average rating and users rated)
@@ -84,13 +85,14 @@ newFull_gb %>%
 >Visualtion three(games that published in each year)
 
 ```{r}
-print(max(newFull_gb$yearpublished))
+#print(max(newFull_gb$yearpublished))
 newFull_gb %>%
   ggplot(aes(x = yearpublished)) +
   labs(y = 'number of games published', x = 'years published') +
-  scale_x_continuous(limits = c(1950,2020)) +
-  #axis(side=1, at=c(1950:2020))+
-  geom_histogram(binwidth = 5)
+  #change the interval into 5 years each
+  scale_x_continuous(breaks = seq(1950, 2020, by = 5)) +
+  geom_histogram(binwidth = 5)+
+   theme_minimal()
 ```
 
 >Visualization four(maybe the see the category each games contains)
