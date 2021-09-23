@@ -33,9 +33,9 @@ library(splitstackshape)
 
 
 ```{r,echo=FALSE,message=FALSE}
-# full_bg<-read_csv('https://raw.githubusercontent.com/bryandmartin/STAT155/master/docs/Projects/project1_bgdataviz/board_game_raw.csv')
-#  
-# write_csv(full_bg,"./Data/full_bg.csv")
+#full_bg<-read_csv('https://raw.githubusercontent.com/bryandmartin/STAT155/master/docs/Projects/project1_bgdataviz/boa#rd_game_raw.csv')
+
+#write_csv(full_bg,"./Data/full_bg.csv")
 
 full_bg<- read_csv("./Data/full_bg.csv")
 ```
@@ -52,6 +52,9 @@ full_gbMechanic<-newFull_gb%>%
 full_gbCategory<-newFull_gb%>%
   cSplit("category", direction="long")
 
+full_gbMechanic2<-newFull_gb%>%
+  cSplit("mechanic", direction="wide")
+
 #searching for certain category(contains the word in the name)
 catan<-newFull_gb%>%
   filter(grepl("Catan",name))
@@ -60,15 +63,31 @@ catan<-newFull_gb%>%
 
 #Mian Section
 
->Visualization one(maybe playingtime and maxplyers)
+>Visualization one(maybe average compexity with the first 6 categories which contain the most games)
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
-newFull_gb %>%
-  ggplot(aes(x = maxplayers, y = playingtime)) +
-  geom_point() +
-  xlim(0, 20) +
-  ylim(0, 20000)+
-  theme_minimal()
+#count how may games in each category
+categoryCounts<-full_gbCategory%>%
+  count(category)
+
+#resorted it in the decreasing number of games in each category
+newOrderCa<-categoryCounts[order(-n)]
+
+#filter the first six category to create a new dataset
+firstSixCa<-
+  full_gbCategory%>%filter(category=="Card Game"|category=="Expansion for Base-game"|category=="Wargame"|category=="Fantasy"|category=="Fantasy"|category=="Fighting"|category=="Science Fiction")
+  
+#boxplot
+firstSixCa%>%
+  ggplot(aes(x=category, y=average_complexity))+# categorical on x, quantitative on y
+  geom_boxplot(color = 'cadetblue4')+
+  coord_flip()+
+  labs(y = 'average complexity', x = 'categories of games')+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, face = "bold"),
+        plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14))+
+        theme_minimal() 
 ```
 
 >Viualization two(maybe the average rating and users rated)
@@ -78,7 +97,11 @@ newFull_gb %>%
   ggplot(aes(x = users_rated, y = average_rating)) +
   labs(y = 'average rating', x = 'the number of users rated') +
   geom_smooth(method = 'lm')+
-  geom_point(color = 'steelblue') +
+  #take 5 points to complete a blue dot and add color to it
+  geom_point(color = 'steelblue',alpha=1/5) +
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14))+
   theme_minimal() 
 ```
 
@@ -92,17 +115,31 @@ newFull_gb %>%
   #change the interval into 5 years each
   scale_x_continuous(breaks = seq(1950, 2020, by = 5)) +
   geom_histogram(binwidth = 5)+
-   theme_minimal()
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14))+
+  theme_minimal()
 ```
 
 >Visualization four(maybe the see the category each games contains)
 
 ```{r}
-
+newFull_gb %>%
+  ggplot(aes(x = maxplaytime)) +
+  geom_histogram(binwidth = 20, fill = "steelblue", position = "identity", alpha = 0.4) + 
+  labs(x = 'maximum playing time') + 
+  xlim(0, 400) +
+  facet_grid(. ~ game_type) + 
+  theme_minimal()
 ```
 
 >Visualization five(maybe using stacked bar plot compare two category of games within years )
 
+```{r}
+
+```
+
+>Visualization six(cateogory and mechanism)
 ```{r}
 
 ```
