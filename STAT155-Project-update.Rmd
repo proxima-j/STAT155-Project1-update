@@ -118,11 +118,10 @@ category_choose <- full_gbCategory %>%
 category_choose %>%
   ggplot(aes(x = category, fill = game_type)) + 
   geom_bar() + 
-  labs(x = 'Category', y = 'Counts', fill = "type of game") + 
+  labs(x = 'categories of games', y = 'counts', fill = "type of game") + 
   scale_fill_manual(values = c("steelblue", "lightblue")) + 
   theme_bw(base_size = 11) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14), 
-        legend.position = "none", 
         axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
   # theme_minimal()
 ```
@@ -153,11 +152,10 @@ mechanic_choose <- full_gbMechanic3 %>%
 mechanic_choose %>%
   ggplot(aes(x = mechanic, fill = game_type)) + 
   geom_bar() + 
-  labs(x = 'Mechanic', y = 'Counts', fill = "type of game") + 
+  labs(x = 'mechanic of games', y = 'counts', fill = "type of game") + 
   scale_fill_manual(values = c("steelblue", "lightblue")) + 
   theme_bw(base_size = 11) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14), 
-        legend.position = "none", 
         axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
   #theme_minimal()
 ```
