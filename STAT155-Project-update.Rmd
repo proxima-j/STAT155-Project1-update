@@ -84,13 +84,14 @@ newFull_gb %>%
 >Visualization two (see the maximum playing time of each game types)
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
+fac_lab = c(boardgame ="Board Game", boardgameexpansion="Board Game Expansion")
 newFull_gb %>%
   ggplot(aes(x = maxplaytime)) +
   geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") + 
   theme_bw(base_size = 20) +
   labs(x = 'maximum playing time') + 
   xlim(0, 400) +
-  facet_grid(. ~ game_type) 
+  facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))
 ```
 
 >Visualization three (using stacked bar plot compare category and game types )
@@ -106,7 +107,10 @@ full_gbCategory %>%
   group_by(game_type) %>%
   mutate(relfreq = n / sum(n)) 
 
-full_gbCategory %>%
+category_choose <- full_gbCategory %>%
+  filter(category %in% c("Card Game", "Dice", "Wargame", "Fantasy", "Fighting", "Science Fiction"))
+
+category_choose %>%
   ggplot(aes(x = category, fill = game_type)) + 
   geom_bar() + 
   labs(x = 'Category', y = 'Counts', fill = "type of game") + 
@@ -133,7 +137,10 @@ full_gbMechanic3 %>%
   group_by(game_type) %>%
   mutate(relfreq = n / sum(n)) 
 
-full_gbMechanic3 %>%
+mechanic_choose <- full_gbMechanic3 %>%
+  filter(mechanic %in% c("Dice Rolling", "Hand Management", "Set Collection", "Modular Board", "Variable Player Powers", "Hex-and-Counter"))
+
+mechanic_choose %>%
   ggplot(aes(x = mechanic, fill = game_type)) + 
   geom_bar() + 
   labs(x = 'Mechanic', y = 'Counts', fill = "type of game") + 
@@ -157,9 +164,12 @@ newOrderCa <- categoryCounts[order(-n)]
 #filter the first six category to create a new dataset
 firstSixCa<-
   full_gbCategory %>% filter(category == "Card Game"|category == "Expansion for Base-game"|category == "Wargame"|category == "Fantasy"|category == "Fantasy"|category == "Fighting"|category == "Science Fiction")
+
+firstSixCa_rm0 <- firstSixCa %>%
+  filter(average_complexity != 0)
   
 #boxplot
-firstSixCa %>%
+firstSixCa_rm0 %>%
   ggplot(aes(x=category, y=average_complexity)) + # categorical on x, quantitative on y
   geom_boxplot(color = 'cadetblue4',fill="cadetblue2",alpha=1/5) +
   coord_flip() +
