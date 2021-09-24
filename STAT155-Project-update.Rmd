@@ -136,12 +136,59 @@ newFull_gb %>%
 >Visualization five(maybe using stacked bar plot compare two category of games within years )
 
 ```{r}
-
+full_gbCategory %>%
+  count(game_type, category) %>%
+  group_by(category) %>%
+  mutate(relfreq = n / sum(n)) 
+full_gbCategory %>%
+  count(game_type, category) %>%
+  group_by(game_type) %>%
+  mutate(relfreq = n / sum(n)) 
+full_gbCategory %>%
+  ggplot(aes(x = category, fill = game_type)) + 
+  geom_bar() + 
+  labs(x = 'Category', y = 'Counts', fill = "type of game") + 
+  scale_fill_manual(values = c("steelblue", "lightblue")) + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14)) +
+  theme_minimal()
 ```
 
->Visualization six(cateogory and mechanism)
 ```{r}
+#resorted mechanics in the long way
+full_gbMechanic3<-newFull_gb%>%
+  cSplit("mechanic", direction="long")
+#plot graph
+full_gbMechanic3 %>%
+  count(game_type, mechanic) %>%
+  group_by(mechanic) %>%
+  mutate(relfreq = n / sum(n)) 
+full_gbMechanic3 %>%
+  count(game_type, mechanic) %>%
+  group_by(game_type) %>%
+  mutate(relfreq = n / sum(n)) 
+full_gbMechanic3 %>%
+  ggplot(aes(x = mechanic, fill = game_type)) + 
+  geom_bar() + 
+  labs(x = 'Mechanic', y = 'Counts', fill = "type of game") + 
+  scale_fill_manual(values = c("steelblue", "lightblue")) + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14)) +
+  theme_minimal()
+```
+>Visualization six(average rating and average complexity)
 
+```{r}
+newFull_gb %>%
+  ggplot(aes(x = average_rating, y = average_complexity)) +
+  geom_point(color = "steelblue", alpha = 0.6) +
+  labs(x = "average rating", y = "average complexity") +
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14))+
+  theme_minimal()
 ```
 
 #Conclusion
