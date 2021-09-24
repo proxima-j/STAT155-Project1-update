@@ -83,11 +83,14 @@ firstSixCa%>%
   geom_boxplot(color = 'cadetblue4',fill="cadetblue2",alpha=1/5)+
   coord_flip()+
   labs(y = 'average complexity', x = 'categories of games')+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, face = "bold"),
-        plot.title = element_text(hjust = 0.5,
+  theme_bw(base_size = 15)+
+  theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 14))+
-        theme_minimal() 
+                                  size = 40),
+        axis.text=element_text(size=10),
+        axis.text.x = element_text(hjust = 1, vjust = 1),
+        axis.text.y = element_text(hjust = 1, vjust = 1))
+        
 ```
 
 >Viualization two(maybe the average rating and users rated)
@@ -127,7 +130,7 @@ newFull_gb %>%
 newFull_gb %>%
   ggplot(aes(x = maxplaytime)) +
   geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") + 
-  theme_bw(base_size = 20)+
+  theme_bw(base_size = 15)+
   labs(x = 'maximum playing time') + 
   xlim(0, 400) +
   facet_grid(. ~ game_type) 
@@ -135,15 +138,17 @@ newFull_gb %>%
 
 >Visualization five(maybe using stacked bar plot compare two category of games within years )
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 full_gbCategory %>%
   count(game_type, category) %>%
   group_by(category) %>%
   mutate(relfreq = n / sum(n)) 
+
 full_gbCategory %>%
   count(game_type, category) %>%
   group_by(game_type) %>%
   mutate(relfreq = n / sum(n)) 
+
 full_gbCategory %>%
   ggplot(aes(x = category, fill = game_type)) + 
   geom_bar() + 
@@ -155,19 +160,22 @@ full_gbCategory %>%
   theme_minimal()
 ```
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 #resorted mechanics in the long way
 full_gbMechanic3<-newFull_gb%>%
   cSplit("mechanic", direction="long")
+
 #plot graph
 full_gbMechanic3 %>%
   count(game_type, mechanic) %>%
   group_by(mechanic) %>%
   mutate(relfreq = n / sum(n)) 
+
 full_gbMechanic3 %>%
   count(game_type, mechanic) %>%
   group_by(game_type) %>%
   mutate(relfreq = n / sum(n)) 
+
 full_gbMechanic3 %>%
   ggplot(aes(x = mechanic, fill = game_type)) + 
   geom_bar() + 
@@ -180,15 +188,19 @@ full_gbMechanic3 %>%
 ```
 >Visualization six(average rating and average complexity)
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 newFull_gb %>%
   ggplot(aes(x = average_rating, y = average_complexity)) +
-  geom_point(color = "steelblue", alpha = 0.6) +
+  geom_point(color = "steelblue", alpha = 0.2) +
+  geom_smooth(method = 'lm',color='coral2')+
   labs(x = "average rating", y = "average complexity") +
+  theme_bw(base_size = 15)+
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 14))+
-  theme_minimal()
+                                  size = 40),
+        axis.text=element_text(size=10),
+        axis.text.x = element_text(hjust = 1, vjust = 1),
+        axis.text.y = element_text(hjust = 1, vjust = 1))
 ```
 
 #Conclusion
