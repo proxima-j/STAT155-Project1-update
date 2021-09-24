@@ -78,6 +78,8 @@ newFull_gb %>%
                                    size = 14)) +
   theme_minimal()
 ```
+> Interpretation
+
 
 >Visualization two (see the maximum playing time of each game types)
 
