@@ -63,34 +63,133 @@ catan<-newFull_gb%>%
 
 #Mian Section
 
->Visualization one(average compexity with the first 6 categories which contain the most games)
+>Visualtion one (games that published in each year)
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+#print(max(newFull_gb$yearpublished))
+newFull_gb %>%
+  ggplot(aes(x = yearpublished)) +
+  labs(y = 'number of games published', x = 'years published') +
+  #change the interval into 5 years each
+  scale_x_continuous(breaks = seq(1950, 2020, by = 5)) +
+  geom_histogram(binwidth = 5,color = "black",fill="deepskyblue4") +
+  theme(plot.title = element_text (hjust = 0.5,
+                                   face = "bold",
+                                   size = 14)) +
+  theme_minimal()
+```
+
+>Visualization two (see the maximum playing time of each game types)
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+newFull_gb %>%
+  ggplot(aes(x = maxplaytime)) +
+  geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") + 
+  theme_bw(base_size = 20) +
+  labs(x = 'maximum playing time') + 
+  xlim(0, 400) +
+  facet_grid(. ~ game_type) 
+```
+
+>Visualization three (using stacked bar plot compare category and game types )
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+full_gbCategory %>%
+  count(game_type, category) %>%
+  group_by(category) %>%
+  mutate(relfreq = n / sum(n)) 
+
+full_gbCategory %>%
+  count(game_type, category) %>%
+  group_by(game_type) %>%
+  mutate(relfreq = n / sum(n)) 
+
+full_gbCategory %>%
+  ggplot(aes(x = category, fill = game_type)) + 
+  geom_bar() + 
+  labs(x = 'Category', y = 'Counts', fill = "type of game") + 
+  scale_fill_manual(values = c("steelblue", "lightblue")) + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14)) +
+  theme_minimal()
+```
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+#resorted mechanics in the long way
+full_gbMechanic3<-newFull_gb%>%
+  cSplit("mechanic", direction="long")
+
+#plot graph
+full_gbMechanic3 %>%
+  count(game_type, mechanic) %>%
+  group_by(mechanic) %>%
+  mutate(relfreq = n / sum(n)) 
+
+full_gbMechanic3 %>%
+  count(game_type, mechanic) %>%
+  group_by(game_type) %>%
+  mutate(relfreq = n / sum(n)) 
+
+full_gbMechanic3 %>%
+  ggplot(aes(x = mechanic, fill = game_type)) + 
+  geom_bar() + 
+  labs(x = 'Mechanic', y = 'Counts', fill = "type of game") + 
+  scale_fill_manual(values = c("steelblue", "lightblue")) + 
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 14)) +
+  theme_minimal()
+```
+
+>Visualization four (see average compexity with the first 6 categories which contain the most games)
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 #count how may games in each category
-categoryCounts<-full_gbCategory%>%
+categoryCounts<-full_gbCategory %>%
   count(category)
 
 #resorted it in the decreasing number of games in each category
-newOrderCa<-categoryCounts[order(-n)]
+newOrderCa <- categoryCounts[order(-n)]
 
 #filter the first six category to create a new dataset
 firstSixCa<-
-  full_gbCategory%>%filter(category=="Card Game"|category=="Expansion for Base-game"|category=="Wargame"|category=="Fantasy"|category=="Fighting"|category=="Science Fiction")
+  full_gbCategory %>% filter(category == "Card Game"|category == "Expansion for Base-game"|category == "Wargame"|category == "Fantasy"|category == "Fantasy"|category == "Fighting"|category == "Science Fiction")
   
 #boxplot
-firstSixCa%>%
-  ggplot(aes(x=category, y=average_complexity))+# categorical on x, quantitative on y
-  geom_boxplot(color = 'cadetblue4')+
-  coord_flip()+
-  labs(y = 'average complexity', x = 'categories of games')+
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, face = "bold"),
-        plot.title = element_text(hjust = 0.5,
+firstSixCa %>%
+  ggplot(aes(x=category, y=average_complexity)) + # categorical on x, quantitative on y
+  geom_boxplot(color = 'cadetblue4',fill="cadetblue2",alpha=1/5) +
+  coord_flip() +
+  labs(y = 'average complexity', x = 'categories of games') +
+  theme_bw(base_size = 15) +
+  theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 14))+
-        theme_minimal() 
+                                  size = 40),
+        axis.text = element_text(size=10),
+        axis.text.x = element_text(hjust = 1, vjust = 1),
+        axis.text.y = element_text(hjust = 1, vjust = 1))
+        
 ```
 
->Viualization two(maybe the average rating and users rated)
+>Visualization five (average rating and average complexity)
+
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
+newFull_gb %>%
+  ggplot(aes(x = average_rating, y = average_complexity)) +
+  geom_point(color = "steelblue", alpha = 0.2) +
+  geom_smooth(method = 'lm',color='coral2')+
+  labs(x = "average rating", y = "average complexity") +
+  theme_bw(base_size = 15)+
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 40),
+        axis.text = element_text(size = 10),
+        axis.text.x = element_text(hjust = 1, vjust = 1),
+        axis.text.y = element_text(hjust = 1, vjust = 1))
+```
+
+>Viualization six (see the average rating and users rated)
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 newFull_gb %>%
@@ -101,63 +200,10 @@ newFull_gb %>%
   geom_point(color = 'steelblue',alpha=1/5) +
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 14))+
+                                  size = 14)) +
   theme_minimal() 
 ```
 
->Visualtion three(games that published in each year)
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-#print(max(newFull_gb$yearpublished))
-newFull_gb %>%
-  ggplot(aes(x = yearpublished)) +
-  labs(y = 'number of games published', x = 'years published') +
-  #change the interval into 5 years each
-  scale_x_continuous(breaks = seq(1950, 2020, by = 5)) +
-  geom_histogram(binwidth = 5) +
-  theme(plot.title = element_text(hjust = 0.5,
-                                  face = "bold",
-                                  size = 14)) +
-  theme_minimal()
-```
-
->Visualization four(maybe compare the maxplaytime and game type)
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-newFull_gb %>%
-  ggplot(aes(x = maxplaytime)) +
-  geom_histogram(binwidth = 20, position = "identity", alpha = 0.4, fill = "steelblue") + 
-  labs(x = 'maximum time of playing') + 
-  facet_grid(. ~ game_type) + 
-  xlim(0, 400) +
-  theme(plot.title = element_text(hjust = 0.5,
-                                  face = "bold",
-                                  size = 14)) +
-  theme_minimal()
-```
-
->Visualization five(maybe using stacked bar plot compare two category of games within years )
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-
-```
-
->Visualization six(cateogory and mechanism)
-
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-# Numerical summary (conditional distribution - conditioning on outcome)
-newFull_gb %>%
-    count(category, mechanic) %>%
-    group_by(category) %>%
-    mutate(relfreq = n / sum(n)) 
-# Numerical summary (conditional distribution - conditioning on smoker)
-newFull_gb %>%
-    count(category, mechanic) %>%
-    group_by(mechanic) %>%
-    mutate(relfreq = n / sum(n)) 
-# stacked bar plot
-
-```
 
 #Conclusion
 
@@ -165,3 +211,4 @@ newFull_gb %>%
 ```{r,eval=FALSE}
 #all the code in here
 ```
+
