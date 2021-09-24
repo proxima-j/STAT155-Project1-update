@@ -85,7 +85,12 @@ newFull_gb %>%
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 fac_lab = c(boardgame ="Board Game", boardgameexpansion="Board Game Expansion")
-newFull_gb %>%
+
+# filter the maxplaytime not equals to 0
+newFull_gb0 <- newFull_gb %>%
+  filter(maxplaytime != 0)
+
+newFull_gb0 %>%
   ggplot(aes(x = maxplaytime)) +
   geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") + 
   theme_bw(base_size = 20) +
@@ -108,17 +113,18 @@ full_gbCategory %>%
   mutate(relfreq = n / sum(n)) 
 
 category_choose <- full_gbCategory %>%
-  filter(category %in% c("Card Game", "Dice", "Wargame", "Fantasy", "Fighting", "Science Fiction"))
+  filter(category %in% c("Card Game", "Expansion for Base-game", "Wargame", "Fantasy", "Fighting", "Science Fiction"))
 
 category_choose %>%
   ggplot(aes(x = category, fill = game_type)) + 
   geom_bar() + 
   labs(x = 'Category', y = 'Counts', fill = "type of game") + 
   scale_fill_manual(values = c("steelblue", "lightblue")) + 
-  theme(plot.title = element_text(hjust = 0.5,
-                                  face = "bold",
-                                  size = 14)) +
-  theme_minimal()
+  theme_bw(base_size = 11) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14), 
+        legend.position = "none", 
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+  # theme_minimal()
 ```
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
@@ -137,6 +143,10 @@ full_gbMechanic3 %>%
   group_by(game_type) %>%
   mutate(relfreq = n / sum(n)) 
 
+#count how may games in each mechanic
+mechanicCounts<-full_gbMechanic3 %>%
+  count(mechanic)
+
 mechanic_choose <- full_gbMechanic3 %>%
   filter(mechanic %in% c("Dice Rolling", "Hand Management", "Set Collection", "Modular Board", "Variable Player Powers", "Hex-and-Counter"))
 
@@ -145,10 +155,11 @@ mechanic_choose %>%
   geom_bar() + 
   labs(x = 'Mechanic', y = 'Counts', fill = "type of game") + 
   scale_fill_manual(values = c("steelblue", "lightblue")) + 
-  theme(plot.title = element_text(hjust = 0.5,
-                                  face = "bold",
-                                  size = 14)) +
-  theme_minimal()
+  theme_bw(base_size = 11) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14), 
+        legend.position = "none", 
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+  #theme_minimal()
 ```
 
 >Visualization four (see average compexity with the first 6 categories which contain the most games)
