@@ -126,39 +126,6 @@ category_choose %>%
   # theme_minimal()
 ```
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
-#resorted mechanics in the long way
-full_gbMechanic3<-newFull_gb%>%
-  cSplit("mechanic", direction="long")
-
-#plot graph
-full_gbMechanic3 %>%
-  count(game_type, mechanic) %>%
-  group_by(mechanic) %>%
-  mutate(relfreq = n / sum(n)) 
-
-full_gbMechanic3 %>%
-  count(game_type, mechanic) %>%
-  group_by(game_type) %>%
-  mutate(relfreq = n / sum(n)) 
-
-#count how may games in each mechanic
-mechanicCounts<-full_gbMechanic3 %>%
-  count(mechanic)
-
-mechanic_choose <- full_gbMechanic3 %>%
-  filter(mechanic %in% c("Dice Rolling", "Hand Management", "Set Collection", "Modular Board", "Variable Player Powers", "Hex-and-Counter"))
-
-mechanic_choose %>%
-  ggplot(aes(x = mechanic, fill = game_type)) + 
-  geom_bar() + 
-  labs(x = 'mechanic of games', y = 'counts', fill = "type of game") + 
-  scale_fill_manual(values = c("steelblue", "lightblue")) + 
-  theme_bw(base_size = 11) +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14), 
-        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
-  #theme_minimal()
-```
 
 >Visualization four (see average compexity with the first 6 categories which contain the most games)
 
@@ -196,11 +163,14 @@ firstSixCa_rm0 %>%
 >Visualization five (average rating and average complexity)
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
-newFull_gb %>%
-  ggplot(aes(x = average_rating, y = average_complexity)) +
+newFull_gb1 <- newFull_gb %>%
+  filter(average_complexity != 0)
+
+newFull_gb1 %>%
+  ggplot(aes(x =average_complexity , y = average_rating)) +
   geom_point(color = "steelblue", alpha = 0.2) +
   geom_smooth(method = 'lm',color='coral2')+
-  labs(x = "average rating", y = "average complexity") +
+  labs(x = "average complexity", y = "average rating") +
   theme_bw(base_size = 15)+
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
@@ -216,7 +186,6 @@ newFull_gb %>%
 newFull_gb %>%
   ggplot(aes(x = users_rated, y = average_rating)) +
   labs(y = 'average rating', x = 'the number of users rated') +
-  geom_smooth(method = 'lm')+
   #take 5 points to complete a blue dot and add color to it
   geom_point(color = 'steelblue',alpha=1/5) +
   theme(plot.title = element_text(hjust = 0.5,
