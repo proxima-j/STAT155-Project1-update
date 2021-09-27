@@ -119,7 +119,8 @@ category_choose %>%
   ggplot(aes(x = category, fill = game_type)) + 
   geom_bar() + 
   labs(x = 'categories of games', y = 'counts', fill = "type of game") + 
-  scale_fill_manual(values = c("steelblue", "lightblue")) + 
+  scale_fill_manual(values = c("steelblue", "lightblue"), 
+                    labels = c("Board Game", "Board Game Expansion")) + 
   theme_bw(base_size = 11) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14), 
         axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
@@ -167,17 +168,18 @@ newFull_gb1 <- newFull_gb %>%
   filter(average_complexity != 0)
 
 newFull_gb1 %>%
-  ggplot(aes(x =average_complexity , y = average_rating)) +
+  ggplot(aes(x = average_complexity , y = average_rating)) +
   geom_point(color = "steelblue", alpha = 0.2) +
   geom_smooth(method = 'lm',color='coral2')+
   labs(x = "average complexity", y = "average rating") +
-  theme_bw(base_size = 15)+
+  theme_bw(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
                                   size = 40),
         axis.text = element_text(size = 10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
-        axis.text.y = element_text(hjust = 1, vjust = 1))
+        axis.text.y = element_text(hjust = 1, vjust = 1)) 
+#cor(average_complexity, average_rating)
 ```
 
 >Viualization six (see the average rating and users rated)
