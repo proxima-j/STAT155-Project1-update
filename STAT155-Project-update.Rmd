@@ -102,15 +102,15 @@ newFull_gb0 %>%
 >Visualization three (using stacked bar plot compare category and game types )
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
-full_gbCategory %>%
-  count(game_type, category) %>%
-  group_by(category) %>%
-  mutate(relfreq = n / sum(n)) 
+# full_gbCategory %>%
+#   count(game_type, category) %>%
+#   group_by(category) %>%
+#   mutate(relfreq = n / sum(n)) 
 
-full_gbCategory %>%
-  count(game_type, category) %>%
-  group_by(game_type) %>%
-  mutate(relfreq = n / sum(n)) 
+# full_gbCategory %>%
+#   count(game_type, category) %>%
+#   group_by(game_type) %>%
+#   mutate(relfreq = n / sum(n)) 
 
 category_choose <- full_gbCategory %>%
   filter(category %in% c("Card Game", "Expansion for Base-game", "Wargame", "Fantasy", "Fighting", "Science Fiction"))
