@@ -34,9 +34,7 @@ library(splitstackshape)
 
 ```{r,echo=FALSE,message=FALSE}
 #full_bg<-read_csv('https://raw.githubusercontent.com/bryandmartin/STAT155/master/docs/Projects/project1_bgdataviz/boa#rd_game_raw.csv')
-
 #write_csv(full_bg,"./Data/full_bg.csv")
-
 full_bg<- read_csv("./Data/full_bg.csv")
 ```
 #Instruction
@@ -45,16 +43,12 @@ full_bg<- read_csv("./Data/full_bg.csv")
 #filter games published in 1950 or later and with at least 25 ratings
 newFull_gb<-full_bg%>%
   filter(yearpublished>=1950,users_rated>=25)
-
 full_gbMechanic<-newFull_gb%>%
   cSplit("category", direction="wide")
-
 full_gbCategory<-newFull_gb%>%
   cSplit("category", direction="long")
-
 full_gbMechanic2<-newFull_gb%>%
   cSplit("mechanic", direction="wide")
-
 #searching for certain category(contains the word in the name)
 catan<-newFull_gb%>%
   filter(grepl("Catan",name))
@@ -80,16 +74,13 @@ newFull_gb %>%
 ```
 > Interpretation
 
-
 >Visualization two (see the maximum playing time of each game types)
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 fac_lab = c(boardgame ="Board Game", boardgameexpansion="Board Game Expansion")
-
 # filter the maxplaytime not equals to 0
 newFull_gb0 <- newFull_gb %>%
   filter(maxplaytime != 0)
-
 newFull_gb0 %>%
   ggplot(aes(x = maxplaytime)) +
   geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") + 
@@ -102,19 +93,16 @@ newFull_gb0 %>%
 >Visualization three (using stacked bar plot compare category and game types )
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
-full_gbCategory %>%
-  count(game_type, category) %>%
-  group_by(category) %>%
-  mutate(relfreq = n / sum(n)) 
-
-full_gbCategory %>%
-  count(game_type, category) %>%
-  group_by(game_type) %>%
-  mutate(relfreq = n / sum(n)) 
-
+# full_gbCategory %>%
+#   count(game_type, category) %>%
+#   group_by(category) %>%
+#   mutate(relfreq = n / sum(n)) 
+# full_gbCategory %>%
+#   count(game_type, category) %>%
+#   group_by(game_type) %>%
+#   mutate(relfreq = n / sum(n)) 
 category_choose <- full_gbCategory %>%
   filter(category %in% c("Card Game", "Expansion for Base-game", "Wargame", "Fantasy", "Fighting", "Science Fiction"))
-
 category_choose %>%
   ggplot(aes(x = category, fill = game_type)) + 
   geom_bar() + 
@@ -134,14 +122,11 @@ category_choose %>%
 #count how may games in each category
 categoryCounts<-full_gbCategory %>%
   count(category)
-
 #resorted it in the decreasing number of games in each category
 newOrderCa <- categoryCounts[order(-n)]
-
 #filter the first six category to create a new dataset
 firstSixCa<-
   full_gbCategory %>% filter(category == "Card Game"|category == "Expansion for Base-game"|category == "Wargame"|category == "Fantasy"|category == "Fantasy"|category == "Fighting"|category == "Science Fiction")
-
 firstSixCa_rm0 <- firstSixCa %>%
   filter(average_complexity != 0)
   
@@ -166,7 +151,6 @@ firstSixCa_rm0 %>%
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 newFull_gb1 <- newFull_gb %>%
   filter(average_complexity != 0)
-
 newFull_gb1 %>%
   ggplot(aes(x = average_complexity , y = average_rating)) +
   geom_point(color = "steelblue", alpha = 0.2) +
@@ -203,4 +187,3 @@ newFull_gb %>%
 ```{r,eval=FALSE}
 #all the code in here
 ```
-
