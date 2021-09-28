@@ -83,9 +83,9 @@ newFull_gb0 <- newFull_gb %>%
   filter(maxplaytime != 0)
 newFull_gb0 %>%
   ggplot(aes(x = maxplaytime)) +
-  geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") + 
+  geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") +
   theme_bw(base_size = 20) +
-  labs(x = 'maximum playing time') + 
+  labs(x = 'maximum playing time') +
   xlim(0, 400) +
   facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))
 ```
@@ -96,21 +96,21 @@ newFull_gb0 %>%
 # full_gbCategory %>%
 #   count(game_type, category) %>%
 #   group_by(category) %>%
-#   mutate(relfreq = n / sum(n)) 
+#   mutate(relfreq = n / sum(n))
 # full_gbCategory %>%
 #   count(game_type, category) %>%
 #   group_by(game_type) %>%
-#   mutate(relfreq = n / sum(n)) 
+#   mutate(relfreq = n / sum(n))
 category_choose <- full_gbCategory %>%
   filter(category %in% c("Card Game", "Expansion for Base-game", "Wargame", "Fantasy", "Fighting", "Science Fiction"))
 category_choose %>%
-  ggplot(aes(x = category, fill = game_type)) + 
-  geom_bar() + 
-  labs(x = 'categories of games', y = 'counts', fill = "type of game") + 
-  scale_fill_manual(values = c("steelblue", "lightblue"), 
-                    labels = c("Board Game", "Board Game Expansion")) + 
+  ggplot(aes(x = category, fill = game_type)) +
+  geom_bar() +
+  labs(x = 'categories of games', y = 'counts', fill = "type of game") +
+  scale_fill_manual(values = c("steelblue", "lightblue"),
+                    labels = c("Board Game", "Board Game Expansion")) +
   theme_bw(base_size = 11) +
-  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14), 
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
         axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
   # theme_minimal()
 ```
@@ -129,7 +129,7 @@ firstSixCa<-
   full_gbCategory %>% filter(category == "Card Game"|category == "Expansion for Base-game"|category == "Wargame"|category == "Fantasy"|category == "Fantasy"|category == "Fighting"|category == "Science Fiction")
 firstSixCa_rm0 <- firstSixCa %>%
   filter(average_complexity != 0)
-  
+
 #boxplot
 firstSixCa_rm0 %>%
   ggplot(aes(x=category, y=average_complexity)) + # categorical on x, quantitative on y
@@ -143,7 +143,7 @@ firstSixCa_rm0 %>%
         axis.text = element_text(size=10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
         axis.text.y = element_text(hjust = 1, vjust = 1))
-        
+
 ```
 
 >Visualization five (average rating and average complexity)
@@ -162,7 +162,7 @@ newFull_gb1 %>%
                                   size = 40),
         axis.text = element_text(size = 10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
-        axis.text.y = element_text(hjust = 1, vjust = 1)) 
+        axis.text.y = element_text(hjust = 1, vjust = 1))
 #cor(average_complexity, average_rating)
 ```
 
@@ -177,7 +177,7 @@ newFull_gb %>%
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
                                   size = 14)) +
-  theme_minimal() 
+  theme_minimal()
 ```
 
 
