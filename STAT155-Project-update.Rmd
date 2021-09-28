@@ -97,10 +97,12 @@ newFull_gb0 %>%
 #   count(game_type, category) %>%
 #   group_by(category) %>%
 #   mutate(relfreq = n / sum(n))
+
 # full_gbCategory %>%
 #   count(game_type, category) %>%
 #   group_by(game_type) %>%
 #   mutate(relfreq = n / sum(n))
+
 category_choose <- full_gbCategory %>%
   filter(category %in% c("Card Game", "Expansion for Base-game", "Wargame", "Fantasy", "Fighting", "Science Fiction"))
 category_choose %>%
@@ -163,7 +165,7 @@ newFull_gb1 %>%
         axis.text = element_text(size = 10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
         axis.text.y = element_text(hjust = 1, vjust = 1))
-#cor(average_complexity, average_rating)
+cor(newFull_gb1$average_complexity, newFull_gb1$average_rating)
 ```
 
 >Viualization six (see the average rating and users rated)
