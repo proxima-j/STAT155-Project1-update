@@ -43,12 +43,16 @@ full_bg<- read_csv("./Data/full_bg.csv")
 #filter games published in 1950 or later and with at least 25 ratings
 newFull_gb<-full_bg%>%
   filter(yearpublished>=1950,users_rated>=25)
+
 full_gbMechanic<-newFull_gb%>%
   cSplit("category", direction="wide")
+
 full_gbCategory<-newFull_gb%>%
   cSplit("category", direction="long")
+
 full_gbMechanic2<-newFull_gb%>%
   cSplit("mechanic", direction="wide")
+
 #searching for certain category(contains the word in the name)
 catan<-newFull_gb%>%
   filter(grepl("Catan",name))
@@ -61,6 +65,7 @@ catan<-newFull_gb%>%
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 #print(max(newFull_gb$yearpublished))
+
 newFull_gb %>%
   ggplot(aes(x = yearpublished)) +
   labs(y = 'number of games published', x = 'years published') +
@@ -71,6 +76,7 @@ newFull_gb %>%
                                    face = "bold",
                                    size = 14)) +
   theme_minimal()
+
 #median(newFull_gb$yearpublished)
 ```
 > Interpretation
@@ -79,9 +85,11 @@ newFull_gb %>%
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 fac_lab = c(boardgame ="Board Game", boardgameexpansion="Board Game Expansion")
+
 # filter the maxplaytime not equals to 0
 newFull_gb0 <- newFull_gb %>%
   filter(maxplaytime != 0)
+
 newFull_gb0 %>%
   ggplot(aes(x = maxplaytime)) +
   geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") +
@@ -117,6 +125,7 @@ newFull_gb0 %>%
 
 category_choose <- full_gbCategory %>%
   filter(category %in% c("Card Game", "Expansion for Base-game", "Wargame", "Fantasy", "Fighting", "Science Fiction"))
+
 category_choose %>%
   ggplot(aes(x = category, fill = game_type)) +
   geom_bar() +
@@ -126,7 +135,7 @@ category_choose %>%
   theme_bw(base_size = 11) +
   theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
         axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
-  # theme_minimal()
+
 ```
 
 
@@ -199,5 +208,40 @@ newFull_gb %>%
 
 # Code Appendix
 ```{r,eval=FALSE}
-#all the code in here
+library(tidyverse)
+library(splitstackshape)
+
+#filter games published in 1950 or later and with at least 25 ratings
+newFull_gb<-full_bg%>%
+  filter(yearpublished>=1950,users_rated>=25)
+
+full_gbMechanic<-newFull_gb%>%
+  cSplit("category", direction="wide")
+
+full_gbCategory<-newFull_gb%>%
+  cSplit("category", direction="long")
+
+full_gbMechanic2<-newFull_gb%>%
+  cSplit("mechanic", direction="wide")
+
+#searching for certain category(contains the word in the name)
+catan<-newFull_gb%>%
+  filter(grepl("Catan",name))
+
+#Mian Section
+#Visualization one
+#print(max(newFull_gb$yearpublished))
+
+newFull_gb %>%
+  ggplot(aes(x = yearpublished)) +
+  labs(y = 'number of games published', x = 'years published') +
+  #change the interval into 5 years each
+  scale_x_continuous(breaks = seq(1950, 2020, by = 5)) +
+  geom_histogram(binwidth = 5,color = "black",fill="deepskyblue4") +
+  theme(plot.title = element_text (hjust = 0.5,
+                                   face = "bold",
+                                   size = 14)) +
+  theme_minimal()
+
+#median(newFull_gb$yearpublished)
 ```
