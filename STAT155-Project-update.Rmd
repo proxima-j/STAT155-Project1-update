@@ -71,7 +71,7 @@ newFull_gb %>%
                                    face = "bold",
                                    size = 14)) +
   theme_minimal()
-median(newFull_gb$yearpublished)
+#median(newFull_gb$yearpublished)
 ```
 > Interpretation
 
@@ -90,15 +90,15 @@ newFull_gb0 %>%
   xlim(0, 400) +
   facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))
 
-boardGame<-newFull_gb %>%
-  filter(game_type=='boardgame')
-
-median(boardGame$maxplaytime)
-
-boardGameExpansion<-newFull_gb %>%
-  filter(game_type=='boardgameexpansion')
-
-median(boardGameExpansion$maxplaytime)
+# boardGame<-newFull_gb %>%
+#   filter(game_type=='boardgame')
+# 
+# median(boardGame$maxplaytime)
+# 
+# boardGameExpansion<-newFull_gb %>%
+#   filter(game_type=='boardgameexpansion')
+# 
+# median(boardGameExpansion$maxplaytime)
 
 ```
 
