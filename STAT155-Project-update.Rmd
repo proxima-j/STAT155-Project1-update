@@ -81,6 +81,11 @@ newFull_gb %>%
 ```
 > Interpretation
 
+This histogram shows the number of games published every five years from 1950-2020. As the graph shows, there are only a few games published in the 2015-2020 interval because the data is covered by 2018, so there is a lot of data missing in that interval. Other than that, the graph can be interpreted as skewed-left and has a long tail. The median of the graph might be around the year 2009. There is an instant increase appeared between 2000 and 2005, and 2005 and 2010, while following decades are also highly increased compared to the previous one. Thus, we assume from the graph that it will continuously increase in the following decades. 
+
+One of our assumptions of such circumstances is that it might be associated with the fast development of technology development. There will be more producers coming into this market and publishing more and more games as the technology develops in the following decades.
+
+
 >Visualization two (see the maximum playing time of each game types)
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
@@ -109,6 +114,9 @@ newFull_gb0 %>%
 # median(boardGameExpansion$maxplaytime)
 
 ```
+> Interpretation
+
+This multiple histogram graph shows how game type influences the maximum playing time of the games. Those graphs show that in the current existing games, board games are much more than the board game expansion and both types of the game contain the max playing time from 0 to 400 hours. Also, the maximum playing time of the board games concentrate around 45 whereas the board game expansion is relatively evenly distributed. In general, the board game expansion seems to have a relatively longer maximum playing time than the board game. Moreover, the existing games that contain very long maximum playing time in the board game could be considered as the outliers in the data set, whereas the board game expansion seems to be more concentrated and has fewer outliers.
 
 >Visualization three (using stacked bar plot compare category and game types )
 
@@ -137,7 +145,11 @@ category_choose %>%
         axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
 
 ```
+> Interpretation
 
+This stacked bar plot compares the first six categories that contain most games with two game types. Since the expansion for base-game and board game expansion are similar, the light blue which represents the board game expansion takes over the category of expansion for base-game. For the other categories, the number of board games is much more than the board game expansion in Card Games and War games, and the number of board games is also slightly more in fantasy, fighting, and science fiction. According to visualization 2, board games are much more than board game expansion, which correlates in visualization 3 that we can see board game outweighs board game expansion in most of the categories, except for Expansion for Base-game. 
+
+We assume that maybe the game producers prefer to produce the board games since they might cost less or contain a higher profit. However, in some categories, the companies need to add new game areas, to create a better game experience, such as fantasy, fighting, and science fiction, which will be relatively evenly distributed into two types of game. In other categories of games, such as card games and war games, the necessity to combine with other elements is relatively low, which the amount of board games is much more than the board game expansion.
 
 >Visualization four (see average compexity with the first 6 categories which contain the most games)
 
@@ -168,6 +180,12 @@ firstSixCa_rm0 %>%
         axis.text.y = element_text(hjust = 1, vjust = 1))
 
 ```
+> Interpretation
+
+These boxplots show the relationship between categories of the game and their average complexity. These boxplots are created based on the first six categories that contain most games. The one that contains most of the games (card game) lies at the bottom of the graph, and the others are arranged in decreasing order. As the graph shows, the median of the average complexity of card games is slightly lower than others which means that the card game might be a little easier than other types on average. It seems that the producer intentionally controls the average complexity of the games around 2 to 3, except for the card game which is around 1 to 2. Also, except for the expansion for base-game, which the higher average complexity it contains, the fewer games exist in that category. 
+
+We assume that higher complexity games may use more resources to produce than low complexity games, which will lead to a relatively higher cost to produce higher complexity board games. Thus, we could assume that the higher the complexity, the fewer games would be produced, which might be associated with the higher cost and/or less demand for such games. 
+
 
 >Visualization five (average rating and average complexity)
 
@@ -188,6 +206,9 @@ newFull_gb1 %>%
         axis.text.y = element_text(hjust = 1, vjust = 1))
 cor(newFull_gb1$average_complexity, newFull_gb1$average_rating)
 ```
+> Interpretation
+
+This scatter plot shows the relationship between the average rating and average complexity of these board games. They have a relatively moderate positive linear correlation (r = 0.5228426), but there are a few outliers. The average rating of the user towards the games is expected to find a positive difference in scores on average when comparing to the average complexity of the games that differs in scores by 1. When the average rating is between 5.0 and 7.5, more games are concentrating on average complexity between 1 and 4. When average complexity reaches 4 and 5, there are much fewer data points shown in the graph, inferring that there is much less rating for the games that have higher average complexity. So, we can also assume that there are fewer high complexity games. 
 
 >Viualization six (see the average rating and users rated)
 
@@ -202,9 +223,12 @@ newFull_gb %>%
                                   size = 14)) +
   theme_minimal()
 ```
+> Interpretation
 
+This scatter plot shows the relationship between the average rating and the number of users rated. Most users rated the game around the rating 7.5, which means the average rating and the number of users rated do not have a strong correlation. The rate of the games is mostly concentrated around 7.5, which indicates that the quality of the game is relatively even. There are more outliers around rating 7.5, and we can assume that more users rated the game, the game either be very popular or it has been published for a very long time, or both.
 
 #Conclusion
+
 
 # Code Appendix
 ```{r,eval=FALSE}
