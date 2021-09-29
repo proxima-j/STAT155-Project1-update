@@ -244,4 +244,81 @@ newFull_gb %>%
   theme_minimal()
 
 #median(newFull_gb$yearpublished)
+
+#Visualization Two
+fac_lab = c(boardgame ="Board Game", boardgameexpansion="Board Game Expansion")
+
+# filter the maxplaytime not equals to 0
+newFull_gb0 <- newFull_gb %>%
+  filter(maxplaytime != 0)
+
+newFull_gb0 %>%
+  ggplot(aes(x = maxplaytime)) +
+  geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") +
+  theme_bw(base_size = 20) +
+  labs(x = 'maximum playing time') +
+  xlim(0, 400) +
+  facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))
+
+# boardGame<-newFull_gb %>%
+#   filter(game_type=='boardgame')
+# 
+# median(boardGame$maxplaytime)
+# 
+# boardGameExpansion<-newFull_gb %>%
+#   filter(game_type=='boardgameexpansion')
+# 
+# median(boardGameExpansion$maxplaytime)
+
+#Visualization Three
+# full_gbCategory %>%
+#   count(game_type, category) %>%
+#   group_by(category) %>%
+#   mutate(relfreq = n / sum(n))
+
+# full_gbCategory %>%
+#   count(game_type, category) %>%
+#   group_by(game_type) %>%
+#   mutate(relfreq = n / sum(n))
+
+category_choose <- full_gbCategory %>%
+  filter(category %in% c("Card Game", "Expansion for Base-game", "Wargame", "Fantasy", "Fighting", "Science Fiction"))
+
+category_choose %>%
+  ggplot(aes(x = category, fill = game_type)) +
+  geom_bar() +
+  labs(x = 'categories of games', y = 'counts', fill = "type of game") +
+  scale_fill_manual(values = c("steelblue", "lightblue"),
+                    labels = c("Board Game", "Board Game Expansion")) +
+  theme_bw(base_size = 11) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
+        axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
+
+#Visualization Four
+#count how may games in each category
+categoryCounts<-full_gbCategory %>%
+  count(category)
+#resorted it in the decreasing number of games in each category
+newOrderCa <- categoryCounts[order(-n)]
+#filter the first six category to create a new dataset
+firstSixCa<-
+  full_gbCategory %>% filter(category == "Card Game"|category == "Expansion for Base-game"|category == "Wargame"|category == "Fantasy"|category == "Fantasy"|category == "Fighting"|category == "Science Fiction")
+firstSixCa_rm0 <- firstSixCa %>%
+  filter(average_complexity != 0)
+
+#boxplot
+firstSixCa_rm0 %>%
+  ggplot(aes(x=category, y=average_complexity)) + # categorical on x, quantitative on y
+  geom_boxplot(color = 'cadetblue4',fill="cadetblue2",alpha=1/5) +
+  coord_flip() +
+  labs(y = 'average complexity', x = 'categories of games') +
+  theme_bw(base_size = 15) +
+  theme(plot.title = element_text(hjust = 0.5,
+                                  face = "bold",
+                                  size = 40),
+        axis.text = element_text(size=10),
+        axis.text.x = element_text(hjust = 1, vjust = 1),
+        axis.text.y = element_text(hjust = 1, vjust = 1))
+
+#Visualization
 ```
