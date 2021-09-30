@@ -61,7 +61,7 @@ catan<-newFull_gb%>%
 
 #Mian Section
 
->Visualtion one (games that published in each year)
+>Visualtion one 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 #print(max(newFull_gb$yearpublished))
@@ -85,7 +85,7 @@ This histogram shows the number of games published every five years from 1950-20
 One of our assumptions of such circumstances is that it might be associated with the fast development of technology development. There will be more producers coming into this market and publishing more and more games as the technology develops in the following decades.
 
 
->Visualization two (see the maximum playing time of each game types)
+>Visualization two 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 fac_lab = c(boardgame ="Board Game", boardgameexpansion="Board Game Expansion")
@@ -117,7 +117,7 @@ newFull_gb0 %>%
 This multiple histogram graph shows how game type influences the maximum playing time of the games. Those graphs show that in the current existing games, board games are much more than the board game expansion and both types of the game contain the max playing time from 0 to 400 hours. Also, the maximum playing time of the board games concentrate around 45 whereas the board game expansion is relatively evenly distributed. In general, the board game expansion seems to have a relatively longer maximum playing time than the board game. Moreover, the existing games that contain very long maximum playing time in the board game could be considered as the outliers in the data set, whereas the board game expansion seems to be more concentrated and has fewer outliers.
 
 
->Visualization three (using stacked bar plot compare category and game types )
+>Visualization three 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 # full_gbCategory %>%
@@ -150,7 +150,7 @@ This stacked bar plot compares two types of board games in the first six categor
 We assume that maybe the game producers prefer to produce the board games since they might cost less or contain a higher profit. However, in some categories, the companies need to add new game areas, to create a better game experience, such as fantasy, fighting, and science fiction, which will be relatively evenly distributed into two types of game. In other categories of games, such as card games and war games, the necessity to combine with other elements is relatively low, with the number of board games being much more than the board game expansion.
 
 
->Visualization four (see average compexity with the first 6 categories which contain the most games)
+>Visualization four 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 #count how may games in each category
@@ -185,7 +185,7 @@ These boxplots show the relationship between categories of the game and their av
 We assume that higher complexity games may use more resources to produce than low complexity games, which will lead to a relatively higher cost to produce higher complexity board games. Thus, we could assume that the higher the complexity, the fewer games would be produced, which might be associated with the higher cost and/or less demand for such games.
 
 
->Visualization five (average rating and average complexity)
+>Visualization five 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 newFull_gb1 <- newFull_gb %>%
@@ -207,7 +207,7 @@ newFull_gb1 %>%
 
 This scatterplot shows the relationship between the average rating and average complexity of these board games. They have a relatively moderate positive linear correlation (r = 0.5228426), but there are a few outliers. The average rating of the user towards the games is expected to find a positive difference in scores on average when comparing to the average complexity of the games that differs in scores by 1. When the average rating is between 5.0 and 7.5, more games are concentrating on average complexity between 1 and 4. When average complexity reaches 4 and 5, there are much fewer data points shown in the graph, inferring that there is much less rating for the games that have higher average complexity. So, we can also assume that there are fewer high complexity games.  
 
->Viualization six (see the average rating and users rated)
+>Viualization six 
 
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 newFull_gb %>%
