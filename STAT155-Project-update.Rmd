@@ -68,14 +68,14 @@ catan<-newFull_gb%>%
 
 newFull_gb %>%
   ggplot(aes(x = yearpublished)) +
-  labs(y = 'number of games published', x = 'years published') +
+  labs(title = "Number of Games Published In Each Five Years",y ='number of games published', x = 'years published') +
   #change the interval into 5 years each
   scale_x_continuous(breaks = seq(1950, 2020, by = 5)) +
   geom_histogram(binwidth = 5,color = "black",fill="deepskyblue4") +
+  theme_classic()+
   theme(plot.title = element_text (hjust = 0.5,
                                    face = "bold",
-                                   size = 14)) +
-  theme_minimal()
+                                   size = 14)) 
 
 #median(newFull_gb$yearpublished)
 ```
@@ -98,7 +98,7 @@ newFull_gb0 %>%
   ggplot(aes(x = maxplaytime)) +
   geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") +
   theme_bw(base_size = 20) +
-  labs(x = 'maximum playing time') +
+  labs(title = "Maxium Playing Time Within Game Types", x = 'maximum playing time') +
   xlim(0, 400) +
   facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))
 
@@ -136,7 +136,8 @@ category_choose <- full_gbCategory %>%
 category_choose %>%
   ggplot(aes(x = category, fill = game_type)) +
   geom_bar() +
-  labs(x = 'categories of games', y = 'counts', fill = "type of game") +
+  labs(title = "Different Game Types' Proportion Within Categories",x = 'categories of games', y = 'counts',
+       fill = "type of    game") +
   scale_fill_manual(values = c("steelblue", "lightblue"),
                     labels = c("Board Game", "Board Game Expansion")) +
   theme_bw(base_size = 11) +
@@ -169,11 +170,11 @@ firstSixCa_rm0 %>%
   ggplot(aes(x=category, y=average_complexity)) + # categorical on x, quantitative on y
   geom_boxplot(color = 'cadetblue4',fill="cadetblue2",alpha=1/5) +
   coord_flip() +
-  labs(y = 'average complexity', x = 'categories of games') +
+  labs(title = "Average Complexity Within Different Game Categories", y = 'average complexity', x = 'categories of games') +
   theme_bw(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 40),
+                                  size = 15),
         axis.text = element_text(size=10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
         axis.text.y = element_text(hjust = 1, vjust = 1))
@@ -194,11 +195,11 @@ newFull_gb1 %>%
   ggplot(aes(x = average_complexity , y = average_rating)) +
   geom_point(color = "steelblue", alpha = 0.2) +
   geom_smooth(method = 'lm',color='coral2')+
-  labs(x = "average complexity", y = "average rating") +
+  labs(title = "Average Rating Responds to Average Complexity", x = "average complexity", y = "average rating") +
   theme_bw(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 40),
+                                  size = 20),
         axis.text = element_text(size = 10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
         axis.text.y = element_text(hjust = 1, vjust = 1))
@@ -212,13 +213,14 @@ This scatterplot shows the relationship between the average rating and average c
 ```{r,echo=FALSE,message=FALSE,warning=FALSE}
 newFull_gb %>%
   ggplot(aes(x = users_rated, y = average_rating)) +
-  labs(y = 'average rating', x = 'the number of users rated') +
+  labs(title = "Average Rating By The Users Rated", y = 'average rating', x = 'the number of users rated') +
   #take 5 points to complete a blue dot and add color to it
   geom_point(color = 'steelblue',alpha=1/5) +
+  theme_minimal()+
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 14)) +
-  theme_minimal()
+                                  size = 14)) 
+
 ```
 
 This scatterplot shows the relationship between the average rating and the number of users rated. Most users rated the game around the rating 7.5, which means the average rating and the number of users rated do not have a strong correlation. The rate of the games is mostly concentrated around 7.5, which indicates that the quality of the game is relatively even. There are more outliers around rating 7.5, and we can assume that more users rated the game, the game either be very popular, or it has been published for a very long time, or both.
@@ -264,19 +266,20 @@ catan<-newFull_gb%>%
   filter(grepl("Catan",name))
 
 #Mian Section
+
 #Visualization one
 #print(max(newFull_gb$yearpublished))
 
 newFull_gb %>%
   ggplot(aes(x = yearpublished)) +
-  labs(y = 'number of games published', x = 'years published') +
+  labs(title = "Number of Games Published In Each Five Years",y ='number of games published', x = 'years published') +
   #change the interval into 5 years each
   scale_x_continuous(breaks = seq(1950, 2020, by = 5)) +
   geom_histogram(binwidth = 5,color = "black",fill="deepskyblue4") +
+  theme_classic()+
   theme(plot.title = element_text (hjust = 0.5,
                                    face = "bold",
-                                   size = 14)) +
-  theme_minimal()
+                                   size = 14)) 
 
 #median(newFull_gb$yearpublished)
 
@@ -291,7 +294,7 @@ newFull_gb0 %>%
   ggplot(aes(x = maxplaytime)) +
   geom_histogram(binwidth = 20,  color = "black", fill = "aquamarine4", position = "identity") +
   theme_bw(base_size = 20) +
-  labs(x = 'maximum playing time') +
+  labs(title = "Maxium Playing Time Within Game Types", x = 'maximum playing time') +
   xlim(0, 400) +
   facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))
 
@@ -322,7 +325,8 @@ category_choose <- full_gbCategory %>%
 category_choose %>%
   ggplot(aes(x = category, fill = game_type)) +
   geom_bar() +
-  labs(x = 'categories of games', y = 'counts', fill = "type of game") +
+  labs(title = "Different Game Types' Proportion Within Categories",x = 'categories of games', y = 'counts',
+       fill = "type of    game") +
   scale_fill_manual(values = c("steelblue", "lightblue"),
                     labels = c("Board Game", "Board Game Expansion")) +
   theme_bw(base_size = 11) +
@@ -346,14 +350,15 @@ firstSixCa_rm0 %>%
   ggplot(aes(x=category, y=average_complexity)) + # categorical on x, quantitative on y
   geom_boxplot(color = 'cadetblue4',fill="cadetblue2",alpha=1/5) +
   coord_flip() +
-  labs(y = 'average complexity', x = 'categories of games') +
+  labs(title = "Average Complexity Within Different Game Categories", y = 'average complexity', x = 'categories of games') +
   theme_bw(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 40),
+                                  size = 15),
         axis.text = element_text(size=10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
         axis.text.y = element_text(hjust = 1, vjust = 1))
+
 
 #Visualization Five
 newFull_gb1 <- newFull_gb %>%
@@ -362,24 +367,24 @@ newFull_gb1 %>%
   ggplot(aes(x = average_complexity , y = average_rating)) +
   geom_point(color = "steelblue", alpha = 0.2) +
   geom_smooth(method = 'lm',color='coral2')+
-  labs(x = "average complexity", y = "average rating") +
+  labs(title = "Average Rating Responds to Average Complexity", x = "average complexity", y = "average rating") +
   theme_bw(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 40),
+                                  size = 20),
         axis.text = element_text(size = 10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
         axis.text.y = element_text(hjust = 1, vjust = 1))
-cor(newFull_gb1$average_complexity, newFull_gb1$average_rating)
+# cor(newFull_gb1$average_complexity, newFull_gb1$average_rating)
 
 #Visualization Six
 newFull_gb %>%
   ggplot(aes(x = users_rated, y = average_rating)) +
-  labs(y = 'average rating', x = 'the number of users rated') +
+  labs(title = "Average Rating By The Users Rated", y = 'average rating', x = 'the number of users rated') +
   #take 5 points to complete a blue dot and add color to it
   geom_point(color = 'steelblue',alpha=1/5) +
+  theme_minimal()+
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 14)) +
-  theme_minimal()
+                                  size = 14)) 
 ```
