@@ -224,7 +224,21 @@ newFull_gb %>%
 This scatterplot shows the relationship between the average rating and the number of users rated. Most users rated the game around the rating 7.5, which means the average rating and the number of users rated do not have a strong correlation. The rate of the games is mostly concentrated around 7.5, which indicates that the quality of the game is relatively even. There are more outliers around rating 7.5, and we can assume that more users rated the game, the game either be very popular, or it has been published for a very long time, or both.
 
 
-#Conclusion
+>Conclusion
+
+These visualization plots compare different variables in the dataset. Some show a strong relationship between two variables, some do not have much correlation between them. We used 5 different plots in these 6 visualizations to show the relationship between different variables.  
+
+Visualization 1 shows the number of games published every five years by histogram. It is a left-skewed diagram, and we assume the continuous increase shown on the graph is caused by the fast development of technology.
+
+Visualization 2 shows how game type influences the maximum playing time of the games by multiple histogram graphs. This multiple histogram graph shows how game type influences the maximum playing time of the games. It shows that board games are much more than board game expansion, and the board game expansion has a relatively longer maximum playing time than the board game. 
+
+Visualization 3 compares two types of board games in the first six categories that contain the most games by using stacked bar plots. The number of board games is more than the board game expansion in most of the categories, except the expansion for base-game. Thus, we assure those game producers prefer to produce more board games since they might cost less or contain a higher profit.
+
+Visualization 4 shows the relationship between categories of the game and their average complexity by using 6 boxplots. The games that have higher average complexity, the fewer games exist in that category, except for the expansion for base-game. Therefore, we assume that producers might produce more low complexity games because high complexity games will lead to a relatively higher cost and there might be less demand.
+
+Visualization 5 shows the relationship between the board games’ average rating and average complexity by using a scatter plot. They have a relatively moderate positive linear correlation, although there are a few outliers.
+
+Visualization 6 shows the relationship between the average rating and the number of users rated by using a scatter plot. There is no strong correlation between the average rating and the number of users rated. Most users rated the game around the rating 7.5, which means the quality of these board games is relatively even. We assume that these can be caused by being very popular, or published for a very long time, or both.
 
 
 # Code Appendix
