@@ -100,7 +100,10 @@ newFull_gb0 %>%
   theme_bw(base_size = 20) +
   labs(title = "Maxium Playing Time Within Game Types", x = 'maximum playing time') +
   xlim(0, 400) +
-  facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))
+  facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))+
+  theme(plot.title = element_text (hjust = 0.5,
+                                   face = "bold",
+                                   size = 14)) 
 
 # boardGame<-newFull_gb %>%
 #   filter(game_type=='boardgame')
@@ -199,7 +202,7 @@ newFull_gb1 %>%
   theme_bw(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 20),
+                                  size = 15),
         axis.text = element_text(size = 10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
         axis.text.y = element_text(hjust = 1, vjust = 1))
@@ -296,7 +299,10 @@ newFull_gb0 %>%
   theme_bw(base_size = 20) +
   labs(title = "Maxium Playing Time Within Game Types", x = 'maximum playing time') +
   xlim(0, 400) +
-  facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))
+  facet_grid(. ~ game_type, labeller = labeller(game_type = fac_lab))+
+  theme(plot.title = element_text (hjust = 0.5,
+                                   face = "bold",
+                                   size = 14)) 
 
 # boardGame<-newFull_gb %>%
 #   filter(game_type=='boardgame')
@@ -371,7 +377,7 @@ newFull_gb1 %>%
   theme_bw(base_size = 15) +
   theme(plot.title = element_text(hjust = 0.5,
                                   face = "bold",
-                                  size = 20),
+                                  size = 15),
         axis.text = element_text(size = 10),
         axis.text.x = element_text(hjust = 1, vjust = 1),
         axis.text.y = element_text(hjust = 1, vjust = 1))
